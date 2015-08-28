@@ -1,6 +1,13 @@
 # Bro EtherNet/IP Protocol Analyser #
 This repository contains the necessary files in order to inspect Ethernet/IP
 packets with Bro.
+For the EtherNet/IP documentation, see:
+
+    * THE CIP NETWORKS LIBRARY Volume 1 Edition 3.3 November, 2007: http://www.tud.ttu.ee/im/Kristjan.Sillmann/ISP0051%20Rakenduslik%20Andmeside/CIP%20docs/CIP%20Vol1_3.3.pdf
+    * THE CIP NETWORKS LIBRARY Volume 2 Edition 1.4 November 2007: http://www.tud.ttu.ee/im/Kristjan.Sillmann/ISP0051%20Rakenduslik%20Andmeside/CIP%20docs/CIP%20Vol2_1.4.pdf
+    * Wireshark dissector: https://github.com/wireshark/wireshark/blob/0808f4c9584b309548996388aafde51820a68932/epan/dissectors/packet-enip.c
+      https://github.com/wireshark/wireshark/blob/0808f4c9584b309548996388aafde51820a68932/epan/dissectors/packet-enip.h
+    * Programming Manual Logix5000 Data Access: http://literature.rockwellautomation.com/idc/groups/literature/documents/pm/1756-pm020_-en-p.pdf
 
 # Installation #
 You can download Bro sources at https://www.bro.org/, or by typing:
@@ -8,7 +15,7 @@ You can download Bro sources at https://www.bro.org/, or by typing:
     $ cd ~
     $ git clone --recursive git://git.bro.org/bro
 
-Then, dowload this Ethernet/IP extension:
+Then, dowload this EtherNet/IP extension:
 
     $ cd ~
     $ git clone https://github.com/scy-phy/bro-cip-enip.git
@@ -59,25 +66,25 @@ See the full documentation at https://www.bro.org/documentation/index.html.
 
 # TODO #
 
-  * -Add documentation
-  * -Add UDP keep-alive packets (Ethernet-IP1 on port 2222)
-  * -Debug the following issues
+    * Add documentation
+    * Add UDP keep-alive packets (Ethernet-IP1 on port 2222)
+    * Debug the following issues
 
 # Known issues #
 
-  * -Some packets are not parsed
-  * -The keep-alive packet on port 2222 without header are not parsed
-  * -There is a out_of_bound: RR_Unit:timeout exception on some packets
-  * -There is a out_of_bound: Data_Address:len exception on some packets
+    * Some packets are not parsed
+    * The keep-alive packet on port 2222 without header are not parsed
+    * There is a out_of_bound: RR_Unit:timeout exception on some packets
+    * There is a out_of_bound: Data_Address:len exception on some packets
 
 ## Detecting attacks ##
 From http://reversemode.com/downloads/logix_report_basecamp.pdf
 
-     * Interface Configuration
+    * Interface Configuration
 
 Specific to 1756-ENBT module
 
-     * Dump 1756-ENBT’s module boot code
-     * Reset 1756-ENBT module
-     * Crash 1756-ENBT module
-     * Flash Update
+    * Dump 1756-ENBT’s module boot code
+    * Reset 1756-ENBT module
+    * Crash 1756-ENBT module
+    * Flash Update
