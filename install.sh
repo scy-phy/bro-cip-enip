@@ -1,5 +1,15 @@
 #!/bin/bash
 
+# This script copies the necessary files
+# to parse the EtherNet/IP packets into bro directory.
+#
+# Precondition:
+# -have the bro sources
+#
+# Usage: ./install </path/to/bro>
+# Then recompile bro (in bro directory)
+# # ./configure && make && make install
+
 if [ $# -eq 0 ]
   then
     echo "You need to specify the Bro installation directory."

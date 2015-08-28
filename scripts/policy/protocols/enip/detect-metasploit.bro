@@ -1,3 +1,9 @@
+##! Script for detecting knows metasploit attacks on PLCs
+##! fom the module auxiliary/admin/scada/multi_cip_command
+##! such as STOPCPU, CRASHCPU, CRASHETHER and RESETETHER.
+
+@load base/protocols/enip
+
 module ENIP;
 
 export {
@@ -52,7 +58,7 @@ event enip_header(c: connection, is_orig: bool, cmd: count, len: count, sh: coun
 		if(attack){
 			NOTICE([$note=ENIP::Metasploit,
 				$conn=c,
-				$msg=fmt("Possible usage of CRASHCPU attack from Metasploit ethernet_multi module.")]);
+				$msg=fmt("Possible usage of CRASHCPU attack from Metasploit multi_cip_command module.")]);
 		}
 	}else if(len == CRASHETHER_len && opt == CRASHETHER_opt){
 	     for(i in sc){
@@ -64,7 +70,7 @@ event enip_header(c: connection, is_orig: bool, cmd: count, len: count, sh: coun
 		if(attack){
 			NOTICE([$note=ENIP::Metasploit,
 				$conn=c,
-				$msg=fmt("Possible usage of CRASHETHER attack from Metasploit ethernet_multi module.")]);
+				$msg=fmt("Possible usage of CRASHETHER attack from Metasploit multi_cip_command module.")]);
 		}
 	}else if(len == RESETETHER_len && opt == RESETETHER_opt){
 	     for(i in sc){
@@ -76,7 +82,7 @@ event enip_header(c: connection, is_orig: bool, cmd: count, len: count, sh: coun
 		if(attack){
 			NOTICE([$note=ENIP::Metasploit,
 				$conn=c,
-				$msg=fmt("Possible usage of RESETETHER attack from Metasploit ethernet_multi module.")]);
+				$msg=fmt("Possible usage of RESETETHER attack from Metasploit multi_cip_command module.")]);
 		}
 	}
 }

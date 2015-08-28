@@ -2,7 +2,7 @@
 # Useful reference for specs: http://odva.org/
 # CIP NETWORKS LIBRARY Volume II: http://www.tud.ttu.ee/im/Kristjan.Sillmann/ISP0051%20Rakenduslik%20Andmeside/CIP%20docs/CIP%20Vol2_1.4.pdf
 #
-# Bro's ENIP analyser
+# Binpac for EtherNet/IP analyser.
 #
 
 ##############################

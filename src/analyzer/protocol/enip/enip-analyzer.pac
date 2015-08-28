@@ -104,6 +104,8 @@ flow ENIP_Flow(is_orig: bool) {
 				connection()->bro_analyzer()->ProtocolConfirmation();
 			}
 			else if(cmd == SEND_RR_DATA || cmd == SEND_UNIT_DATA){
+				// Some packet use unconventionnal non-zero
+				//options. Commented in order to detect them.
 				// if(opt != 0x00000000){
 				// 	connection()->bro_analyzer()->ProtocolViolation(fmt("invalid ENIP message options for SEND_RR_DATA or SEND_UNIT_DATA (%d)",
 				// 							opt));
@@ -180,7 +182,8 @@ flow ENIP_Flow(is_orig: bool) {
 
 	function enip_common_packet_format(count: uint16): bool%{
 		if(::enip_common_packet_format){
-			if(count == COUNT_1 || count == 0x0000){ //count shall be at least 2
+			//count shall be at least 2
+			if(count == COUNT_1 || count == 0x0000){
 				connection()->bro_analyzer()->ProtocolViolation(fmt("invalid ENIP item count in Common Packet Format (%d)", count));
 				return false;
 			}

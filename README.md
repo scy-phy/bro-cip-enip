@@ -66,7 +66,6 @@ See the full documentation at https://www.bro.org/documentation/index.html.
 
 # TODO #
 
-    * Add documentation
     * Add UDP keep-alive packets (Ethernet-IP1 on port 2222)
     * Debug the following issues
 
