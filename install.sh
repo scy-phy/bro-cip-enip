@@ -31,7 +31,9 @@ scripts/base/protocols/enip/
 scripts/policy/protocols/enip/
 src/analyzer/protocol/enip/
 testing/btest/scripts/base/protocols/enip/
+testing/btest/scripts/policy/protocols/enip/
 testing/btest/Baseline/scripts.base.protocols.enip.*/
+testing/btest/Baseline/scripts.policy.protocols.enip.*/
 testing/btest/Traces/enip/
 "
 

@@ -1,0 +1,32 @@
+enip_header, T, 101, 4, 0, 0, [0, 0, 0, 0, 0, 0, 0, 0], 0
+enip_register, T, 1, 0
+enip_header, F, 101, 4, 7536641, 0, [0, 0, 0, 0, 0, 0, 0, 0], 0
+enip_register, F, 1, 0
+enip_header, T, 111, 64, 7536641, 0, [0, 0, 0, 0, 0, 0, 0, 0], 0
+enip_data_address, T, 0, 0, []
+enip_data_address, T, 178, 48, [84, 2, 32, 6, 36, 1, 0, 249, 49, 0, 0, 128, 48, 0, 254, 128, 55, 19, 77, 0, 239, 190, 173, 222, 0, 0, 0, 0, 0, 18, 122, 0, 244, 67, 0, 18, 122, 0, 244, 67, 163, 3, 1, 0, 32, 2, 36, 1]
+enip_common_packet_format, T, 2
+enip_rr_unit, T, 0, 0
+enip_header, F, 111, 46, 7536641, 0, [0, 0, 0, 0, 0, 0, 0, 0], 0
+enip_data_address, F, 0, 0, []
+enip_data_address, F, 178, 30, [212, 0, 0, 0, 124, 66, 176, 255, 48, 0, 254, 128, 55, 19, 77, 0, 239, 190, 173, 222, 0, 18, 122, 0, 0, 18, 122, 0, 0, 0]
+enip_common_packet_format, F, 2
+enip_rr_unit, F, 0, 0
+enip_header, T, 112, 34, 7536641, 0, [0, 0, 0, 0, 0, 0, 0, 0], 0
+enip_data_address, T, 161, 4, [124, 66, 176, 255]
+enip_data_address, T, 177, 14, [1, 0, 3, 3, 32, 107, 37, 0, 131, 17, 1, 0, 10, 0]
+enip_common_packet_format, T, 2
+enip_rr_unit, T, 0, 0
+enip_header, F, 112, 33, 7536641, 0, [0, 0, 0, 0, 0, 0, 0, 0], 0
+enip_header, T, 112, 35, 7536641, 0, [0, 0, 0, 0, 0, 0, 0, 0], 0
+enip_data_address, T, 161, 4, [124, 66, 176, 255]
+enip_data_address, T, 177, 15, [2, 0, 4, 3, 32, 107, 37, 0, 131, 17, 1, 0, 10, 0, 2]
+enip_common_packet_format, T, 2
+enip_rr_unit, T, 0, 0
+enip_header, F, 112, 26, 7536641, 0, [0, 0, 0, 0, 0, 0, 0, 0], 0
+enip_header, T, 112, 34, 7536641, 0, [0, 0, 0, 0, 0, 0, 0, 0], 0
+enip_data_address, T, 161, 4, [124, 66, 176, 255]
+enip_data_address, T, 177, 14, [3, 0, 3, 3, 32, 107, 37, 0, 131, 17, 1, 0, 10, 0]
+enip_common_packet_format, T, 2
+enip_rr_unit, T, 0, 0
+enip_header, F, 112, 33, 7536641, 0, [0, 0, 0, 0, 0, 0, 0, 0], 0

@@ -1,5 +1,5 @@
 #
-# @TEST-EXEC: bro -r $TRACES/enip/enip_rw_dummy_tag.pcapng > output
+# @TEST-EXEC: bro -r $TRACES/enip/enip_rw_dummy_tag.pcapng %DIR/events.bro > output
 # @TEST-EXEC: btest-diff output
 # @TEST-EXEC: cat output | awk '{print }' | sort | uniq | wc -l > covered
 # @TEST-EXEC: cat ${DIST}/src/analyzer/protocol/enip/events.bif | grep "^event enip_" | wc -l > total

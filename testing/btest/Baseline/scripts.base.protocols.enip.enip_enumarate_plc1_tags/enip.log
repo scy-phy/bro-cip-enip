@@ -3,7 +3,7 @@
 #empty_field	(empty)
 #unset_field	-
 #path	enip
-#open	2015-08-28-04-21-33
+#open	2015-08-28-06-22-23
 #fields	ts	uid	id.orig_h	id.orig_p	id.resp_h	id.resp_p	command	length	session_handler	status	sender_context	options
 #types	time	string	addr	port	addr	port	string	count	count	string	vector[count]	count
 1431680166.817730	CXWv6p3arKYeMETxOg	192.168.1.250	38801	192.168.1.10	44818	REGISTER_SESSION	4	0	SUCCESS	0,0,0,0,0,0,0,0	0
@@ -4260,4 +4260,4 @@
 1431682106.897624	CzA03V1VcgagLjnO92	192.168.1.250	38819	192.168.1.10	44818	REGISTER_SESSION	4	3801089	SUCCESS	0,0,0,0,0,0,0,0	0
 1431682106.901097	CzA03V1VcgagLjnO92	192.168.1.250	38819	192.168.1.10	44818	SEND_RR_DATA	50	3801089	SUCCESS	0,0,0,0,0,0,0,0	0
 1431682106.903976	CzA03V1VcgagLjnO92	192.168.1.250	38819	192.168.1.10	44818	SEND_RR_DATA	364	3801089	SUCCESS	0,0,0,0,0,0,0,0	0
-#close	2015-08-28-04-21-33
+#close	2015-08-28-06-22-23

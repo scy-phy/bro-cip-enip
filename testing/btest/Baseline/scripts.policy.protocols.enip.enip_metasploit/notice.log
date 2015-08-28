@@ -1,0 +1,13 @@
+#separator \x09
+#set_separator	,
+#empty_field	(empty)
+#unset_field	-
+#path	notice
+#open	2015-08-28-06-13-50
+#fields	ts	uid	id.orig_h	id.orig_p	id.resp_h	id.resp_p	fuid	file_mime_type	file_desc	proto	note	msg	sub	src	dst	p	n	peer_descr	actions	suppress_for	dropped	remote_location.country_code	remote_location.region	remote_location.city	remote_location.latitude	remote_location.longitude
+#types	time	string	addr	port	addr	port	string	string	string	enum	enum	string	string	addr	addr	port	count	string	set[enum]	interval	bool	string	string	string	double	double
+1440355913.680857	CRJuHdVW0XPVINV8a	127.0.0.1	51310	127.0.0.1	44818	-	-	-	tcp	ENIP::Metasploit	Possible usage of STOPCPU attack from Metasploit ethernet_multi module.	-	127.0.0.1	127.0.0.1	44818	-	bro	Notice::ACTION_LOG	3600.000000	F	-	-	-	-	-
+1440355925.663507	CPbrpk1qSsw6ESzHV4	127.0.0.1	42942	127.0.0.1	44818	-	-	-	tcp	ENIP::Metasploit	Possible usage of CRASHCPU attack from Metasploit multi_cip_command module.	-	127.0.0.1	127.0.0.1	44818	-	bro	Notice::ACTION_LOG	3600.000000	F	-	-	-	-	-
+1440355935.511782	C6pKV8GSxOnSLghOa	127.0.0.1	36768	127.0.0.1	44818	-	-	-	tcp	ENIP::Metasploit	Possible usage of CRASHETHER attack from Metasploit multi_cip_command module.	-	127.0.0.1	127.0.0.1	44818	-	bro	Notice::ACTION_LOG	3600.000000	F	-	-	-	-	-
+1440355942.617976	CIPOse170MGiRM1Qf4	127.0.0.1	53860	127.0.0.1	44818	-	-	-	tcp	ENIP::Metasploit	Possible usage of RESETETHER attack from Metasploit multi_cip_command module.	-	127.0.0.1	127.0.0.1	44818	-	bro	Notice::ACTION_LOG	3600.000000	F	-	-	-	-	-
+#close	2015-08-28-06-13-51

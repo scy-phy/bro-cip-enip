@@ -1,0 +1,14 @@
+enip_header, T, 101, 4, 0, 0, [0, 0, 0, 0, 0, 0, 0, 0], 0
+enip_register, T, 1, 0
+enip_header, F, 101, 4, 2228225, 0, [0, 0, 0, 0, 0, 0, 0, 0], 0
+enip_register, F, 1, 0
+enip_header, T, 111, 50, 2228225, 0, [48, 0, 0, 0, 0, 0, 0, 0], 0
+enip_data_address, T, 0, 0, []
+enip_data_address, T, 178, 34, [82, 2, 32, 6, 36, 1, 5, 157, 20, 0, 76, 8, 145, 13, 68, 73, 95, 87, 73, 70, 73, 95, 82, 73, 79, 95, 49, 0, 1, 0, 1, 0, 1, 0]
+enip_common_packet_format, T, 2
+enip_rr_unit, T, 0, 0
+enip_header, F, 111, 23, 2228225, 0, [48, 0, 0, 0, 0, 0, 0, 0], 0
+enip_data_address, F, 0, 0, []
+enip_data_address, F, 178, 7, [204, 0, 0, 0, 193, 0, 255]
+enip_common_packet_format, F, 2
+enip_rr_unit, F, 0, 0

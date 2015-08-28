@@ -8,7 +8,7 @@ test="# @TEST-EXEC: btest-diff output\n# @TEST-EXEC: cat output | awk '{print $1
 for i in $( ls ); do
     if [[ $i = *."$extension" ]]; then
 	file=`echo $i| cut -d'.' -f 1`
-	test0="#\n# @TEST-EXEC: bro -r \$TRACES/$protocol/$file.pcapng > output\n$test"
+	test0="#\n# @TEST-EXEC: bro -r \$TRACES/$protocol/$file.pcapng \%DIR/events.bro > output\n$test"
 	echo -e $test0 > ../../scripts/base/protocols/enip/$file.bro
     fi
 done
