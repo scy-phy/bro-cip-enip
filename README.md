@@ -58,23 +58,26 @@ or by typing:
 See the full documentation at https://www.bro.org/documentation/index.html.
 
 # TODO #
--Add documentation
--Add UDP keep-alive packets (Ethernet-IP1 on port 2222).
--Debug the following issues.
+
+  * -Add documentation
+  * -Add UDP keep-alive packets (Ethernet-IP1 on port 2222)
+  * -Debug the following issues
 
 # Known issues #
--Some packets are not parsed.
--The keep-alive packet on port 2222 without header are not parsed.
--There is a out_of_bound: RR_Unit:timeout exception on some packets.
--There is a out_of_bound: Data_Address:len exception on some packets.
+
+  * -Some packets are not parsed
+  * -The keep-alive packet on port 2222 without header are not parsed
+  * -There is a out_of_bound: RR_Unit:timeout exception on some packets
+  * -There is a out_of_bound: Data_Address:len exception on some packets
 
 ## Detecting attacks ##
 From http://reversemode.com/downloads/logix_report_basecamp.pdf
-     Generic attacks
-     	  1: Interface Configuration
 
-     Specific to 1756-ENBT module
-     	  4: Dump 1756-ENBT’s module boot code
-	  5: Reset 1756-ENBT module
-	  6: Crash 1756-ENBT module
-	  7: Flash Update
+     * Interface Configuration
+
+Specific to 1756-ENBT module
+
+     * Dump 1756-ENBT’s module boot code
+     * Reset 1756-ENBT module
+     * Crash 1756-ENBT module
+     * Flash Update
