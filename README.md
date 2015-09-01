@@ -37,6 +37,12 @@ Then, go to your Bro directory and run:
     $ cd ~/bro
     # ./configure && make && make install
 
+The last step is to add the Bro binaries to your PATH environment variable:
+
+    $ export PATH=/usr/local/bro/bin:$PATH
+
+You can also add it to your bashrc file to make it permanent, or use /usr/local/bro/bin directory if you don't want to change your PATH vriable.
+
 ## Troubleshooting ##
 
 Before compiling bro, be sure that the ./install.sh script worked well, and the files are copied in the right directory.
