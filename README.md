@@ -24,18 +24,31 @@ And go to this bro-cip-enip directory:
 
     $ cd ~/bro-cip-enip
 
-To install this EtherNet/IP Protocol Analyser, you can run:
+To install this EtherNet/IP Protocol Analyser, you can run (please note the ending /):
 
-    $ ./install.sh </path/to/bro/directory>
+    $ ./install.sh </path/to/bro/directory/>
 
-For this example it would be:
+For this example it would be (please note the ending /):
 
-    $ ./install.sh ~/bro
+    $ ./install.sh ~/bro/
 
 Then, go to your Bro directory and run:
 
     $ cd ~/bro
     # ./configure && make && make install
+
+## Troubleshooting ##
+
+Before compiling bro, be sure that the ./install.sh script worked well, and the files are copied in the right directory.
+You can see the output of this command to be sure:
+
+    $ find ~/bro -name enip
+
+As Libcaf (C++ Actor Framework) is now a requirement to build Bro, you may have some problems during the ./configure command, for instance the libcaf packet missing.
+If it is the case you have two solutions:
+
+   * Download and compile libcaf from https://github.com/actor-framework/actor-framework
+   * Don't compile the Broker plugin using ./configure --disable-broker as mentioned in http://comments.gmane.org/gmane.comp.security.detection.bro/8473
 
 # Usage #
 You can run Bro with any of your .pcap files containing some Ethernet/IP
