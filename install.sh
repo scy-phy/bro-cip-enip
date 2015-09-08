@@ -13,7 +13,7 @@
 if [ $# -eq 0 ]
   then
     echo "You need to specify the Bro installation directory."
-    echo "Usage: $0 </path/to/bro>"
+    echo "Usage: $0 </path/to/bro/>"
     exit 1
 fi
 
@@ -35,6 +35,8 @@ testing/btest/scripts/policy/protocols/enip/
 testing/btest/Baseline/scripts.base.protocols.enip.*/
 testing/btest/Baseline/scripts.policy.protocols.enip.*/
 testing/btest/Traces/enip/
+scripts/base/protocols/cip/
+src/analyzer/protocol/cip/
 "
 
 for varname in $dirs

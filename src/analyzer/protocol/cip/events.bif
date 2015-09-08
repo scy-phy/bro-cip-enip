@@ -1,0 +1,7 @@
+## Generated for cip connections
+##
+## See `Google <http://lmgtfy.com/?q=cip>`__ for more information about cip
+##
+## c: The connection
+##
+event cip_event%(c: connection%);
