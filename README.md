@@ -94,6 +94,7 @@ See the full documentation at https://www.bro.org/documentation/index.html.
     * The keep-alive packet on port 2222 without header are not parsed
     * There is a out_of_bound: RR_Unit:timeout exception on some packets
     * There is a out_of_bound: Data_Address:len exception on some packets
+    * The CIP payloads are interpreted as numbers (count) and not as bytes
 
 ## Detecting attacks ##
 From http://reversemode.com/downloads/logix_report_basecamp.pdf
