@@ -13,9 +13,9 @@ connection ENIP_Conn(bro_analyzer: BroAnalyzer) {
 	#define RESERVED_MASK1 0x1F00
 	#define RESERVED_MASK2 0xC000
 	#define RESERVED_MASK3 0x00FE
-        #define ZERO_1B = 0x00
-        #define ZERO_2B = 0x0000
-        #define ZERO_4B = 0x00000000
+        #define ZERO_1B 0x00
+        #define ZERO_2B 0x0000
+        #define ZERO_4B 0x00000000
 %}
 
 flow ENIP_Flow(is_orig: bool) {
