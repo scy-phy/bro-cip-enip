@@ -5,3 +5,5 @@
 ## c: The connection
 ##
 event cip_event%(c: connection%);
+
+event cip_message_request%(c: connection, is_orig: bool, service: count, path_size: count, path: index_vec%);

@@ -13,6 +13,9 @@ connection ENIP_Conn(bro_analyzer: BroAnalyzer) {
 	#define RESERVED_MASK1 0x1F00
 	#define RESERVED_MASK2 0xC000
 	#define RESERVED_MASK3 0x00FE
+        #define ZERO_1B = 0x00
+        #define ZERO_2B = 0x0000
+        #define ZERO_4B = 0x00000000
 %}
 
 flow ENIP_Flow(is_orig: bool) {
@@ -22,12 +25,12 @@ flow ENIP_Flow(is_orig: bool) {
 	function enip_header(cmd: uint16, len: uint16, sh: uint32, st: uint32, sc: bytestring, opt: uint32): bool%{
 		if(::enip_header){
 			if(cmd == NOP){
-				if(st != 0x00000000){
+				if(st != ZERO_4B){
 					connection()->bro_analyzer()->ProtocolViolation(fmt("invalid ENIP message status for NOP (%d)",
 											    st));
 					return false;
 				}
-				if(opt != 0x00000000){
+				if(opt != ZERO_4B){
 					connection()->bro_analyzer()->ProtocolViolation(fmt("invalid ENIP message options for NOP (%d)",
 											opt));
 					return false;
@@ -36,19 +39,19 @@ flow ENIP_Flow(is_orig: bool) {
 				connection()->bro_analyzer()->ProtocolConfirmation();
 			}
 			else if(cmd == LIST_IDENTITY || cmd == LIST_INTERFACES){
-				if(len != 0x0000){
+				if(len != ZERO_2B){
 					connection()->bro_analyzer()->ProtocolViolation(fmt("invalid ENIP message length for LIST_IDENTITY or LIST_INTERFACES (%d)",
 											    len));
 					return false;
 				}
 				for(unsigned int i = 0; i < SIZE; i++){
-					if(sc[i] != 0x00){
+					if(sc[i] != ZERO_1B){
 						connection()->bro_analyzer()->ProtocolViolation(fmt("invalid ENIP message sender context for LIST_IDENTITY or LIST_INTERFACES (%d)",
 											sc[i]));
 					return false;
 					}
 				}
-				if(opt != 0x00000000){
+				if(opt != ZERO_4B){
 					connection()->bro_analyzer()->ProtocolViolation(fmt("invalid ENIP message options for LIST_IDENTITY or LIST_INTERFACES (%d)",
 											opt));
 					return false;
@@ -62,7 +65,7 @@ flow ENIP_Flow(is_orig: bool) {
 											    len));
 					return false;
 				}
-				if(opt != 0x00000000){
+				if(opt != ZERO_4B){
 					connection()->bro_analyzer()->ProtocolViolation(fmt("invalid ENIP message options for REGISTER_SESSION (%d)",
 											opt));
 					return false;
@@ -71,17 +74,17 @@ flow ENIP_Flow(is_orig: bool) {
 				connection()->bro_analyzer()->ProtocolConfirmation();
 			}
 			else if(cmd == UNREGISTER_SESSION){
-				if(len != 0x0000){
+				if(len != ZERO_2B){
 					connection()->bro_analyzer()->ProtocolViolation(fmt("invalid ENIP message length for UNREGISTER_SESSION (%d)",
 											    len));
 					return false;
 				}
-				if(st != 0x00000000){
+				if(st != ZERO_4B){
 					connection()->bro_analyzer()->ProtocolViolation(fmt("invalid ENIP message status for UNREGISTER_SESSION (%d)",
 											    st));
 					return false;
 				}
-				if(opt != 0x00000000){
+				if(opt != ZERO_4B){
 					connection()->bro_analyzer()->ProtocolViolation(fmt("invalid ENIP message options for UNREGISTER_SESSION (%d)",
 											opt));
 					return false;
@@ -90,12 +93,12 @@ flow ENIP_Flow(is_orig: bool) {
 				connection()->bro_analyzer()->ProtocolConfirmation();
 			}
 			else if(cmd == LIST_SERVICES){
-				if(is_orig() && len != 0x0000){
+				if(is_orig() && len != ZERO_2B){
 					connection()->bro_analyzer()->ProtocolViolation(fmt("invalid ENIP message length for LIST_SERVICES (%d)",
 											    len));
 					return false;
 				}
-				if(opt != 0x00000000){
+				if(opt != ZERO_4B){
 					connection()->bro_analyzer()->ProtocolViolation(fmt("invalid ENIP message options for LIST_SERVICES (%d)",
 											opt));
 					return false;
@@ -106,7 +109,7 @@ flow ENIP_Flow(is_orig: bool) {
 			else if(cmd == SEND_RR_DATA || cmd == SEND_UNIT_DATA){
 				// Some packet use unconventionnal non-zero
 				//options. Commented in order to detect them.
-				// if(opt != 0x00000000){
+				// if(opt != ZERO_4B){
 				// 	connection()->bro_analyzer()->ProtocolViolation(fmt("invalid ENIP message options for SEND_RR_DATA or SEND_UNIT_DATA (%d)",
 				// 							opt));
 				// 	return false;
@@ -145,7 +148,7 @@ flow ENIP_Flow(is_orig: bool) {
 				return false;
 			}
 
-			if(id == ADDRESS && len != 0x0000){
+			if(id == ADDRESS && len != ZERO_2B){
 				connection()->bro_analyzer()->ProtocolViolation(fmt("invalid ENIP item ID and length (%d,%d)", id, len));
 				return false;
 			}
@@ -183,7 +186,7 @@ flow ENIP_Flow(is_orig: bool) {
 	function enip_common_packet_format(count: uint16): bool%{
 		if(::enip_common_packet_format){
 			//count shall be at least 2
-			if(count == COUNT_1 || count == 0x0000){
+			if(count == COUNT_1 || count == ZERO_2B){
 				connection()->bro_analyzer()->ProtocolViolation(fmt("invalid ENIP item count in Common Packet Format (%d)", count));
 				return false;
 			}
@@ -240,7 +243,7 @@ flow ENIP_Flow(is_orig: bool) {
 				connection()->bro_analyzer()->ProtocolViolation(fmt("invalid ENIP protocol in Register (%d)", protocol));
 				return false;
 			}
-			if(options != 0x0000){
+			if(options != ZERO_2B){
 				connection()->bro_analyzer()->ProtocolViolation(fmt("invalid ENIP options in Register (%d)", options));
 				return false;
 			}
@@ -255,11 +258,11 @@ flow ENIP_Flow(is_orig: bool) {
 
 	function enip_rr_unit(cmd: uint16, iface_handle: uint32, timeout: uint16): bool%{
 		if(::enip_rr_unit){
-			if(iface_handle != 0x00000000){
+			if(iface_handle != ZERO_4B){
 				connection()->bro_analyzer()->ProtocolViolation(fmt("invalid ENIP interface handle in Send_RR or Send_Unit (%d)", iface_handle));
 				return false;
 			}
-			if(cmd == SEND_UNIT_DATA && timeout != 0x0000){
+			if(cmd == SEND_UNIT_DATA && timeout != ZERO_2B){
 				connection()->bro_analyzer()->ProtocolViolation(fmt("invalid ENIP timeout in Send_Unit (%d)", timeout));
 				return false;
 			}

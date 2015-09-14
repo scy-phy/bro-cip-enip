@@ -149,7 +149,7 @@ type List_I = record {
 type List_Services = record {
         item_count: uint16;
 	data: Target_Item_Services[item_count];
-};
+} &byteorder=littleendian;
 
 # type UCMM = record {
 #       item_count: uint16;
@@ -171,27 +171,27 @@ type List_Services = record {
 
 type Nop = record {
         unused: bytestring &restofdata;
-};
+} &byteorder=littleendian;
 
 type List_Services_Request = record {
         unused: bytestring &restofdata;
-};
+} &byteorder=littleendian;
 
 type List_I_Request = record {
         unused: bytestring &restofdata;
-};
+} &byteorder=littleendian;
 
 type List_Services_Response = record {
         item_count: uint16;
 	data: Target_Item_Services[item_count];
-};
+} &byteorder=littleendian;
 
 type List_Interfaces_Response = record {
         item_count: uint16;
 	data: Target_Item[item_count];
-};
+} &byteorder=littleendian;
 
 type List_Identity_Response = record {
         item_count: uint16;
 	data: Target_Item[item_count];
-};
+} &byteorder=littleendian;

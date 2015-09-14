@@ -6,7 +6,8 @@
 # Precondition:
 # -have the bro sources
 #
-# Usage: ./install </path/to/bro>
+# Usage: ./install </path/to/bro/>
+# (please note the last /)
 # Then recompile bro (in bro directory)
 # # ./configure && make && make install
 
@@ -42,17 +43,19 @@ src/analyzer/protocol/cip/
 for varname in $dirs
 do
     if [ ! -d $path$varname ]; then
-	echo "Creating $path$varname."
+	echo "Creating $path$varname"
 	mkdir -p $path$varname
     fi
     cpy=$path$varname..
-    echo "Copying files from $varname."
+    echo "Copying files from $varname"
+    echo "    to $path$varname"
     cp -r $varname $cpy
 done
 
 for varname in $files
 do
     cpy=$path$varname
-    echo "Copying file $varname."
+    echo "Copying file $varname"
+    echo "    to $path$varname"
     cp $varname $cpy
 done

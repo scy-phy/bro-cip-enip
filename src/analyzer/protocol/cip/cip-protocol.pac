@@ -76,27 +76,25 @@
 # 900hex - CFFhex Vendor Specific
 # D00hex - FFFFhex Reserved by ODVA/CI for future use
 
-# # E8B means 8-bit element
-# # C16B means 16-bit class
 # enum segment_types {
-#      E8B = 0x28,
-#      E16B = 0x29,
-#      E32B = 0x2A,
+#      8B_ELEMENT = 0x28,
+#      16B_ELEMENT = 0x29,
+#      32B_ELEMENT = 0x2A,
 
-#      C8B = 0x20,
-#      C16B = 0x21,
+#      8B_CLASS = 0x20,
+#      16B_CLASS = 0x21,
 
-#      I8B = 0x24,
-#      I16B = 0x25,
+#      8B_INSTANCE = 0x24,
+#      16B_INSTANCE = 0x25,
 
-#      A8B = 0x30,
-#      A16B = 0x31,
+#      8B_ATTRIBUTE = 0x30,
+#      16B_ATTRIBUTE = 0x31,
 
 #      ANSI = 0x91,
 # };
 
 enum services {
-     # Reply = request + 0x80
+     # XXX_REPLY = XXX + 0x80
      READ_TAG = 0x4C,
      READ_TAG_REPLY = 0xCC,
      READ_TAG_FRAGMENTED = 0x52,
@@ -113,7 +111,9 @@ enum services {
      GET_ATTRIBUTES_ALL_REPLY = 0x81,
      MULTIPLE_SERVICE_PACKET = 0x0A,
      MULTIPLE_SERVICE_PACKET_REPLY = 0x8A,
-     # 83, 8E, 03, 0E
+     GET_ATTRIBUTE_LIST = 0x03;
+     GET_ATTRIBUTE_LIST_REPLY = 0x83;
+     # 0E, 8E
 };
 
 enum tag_types {
@@ -128,16 +128,22 @@ enum tag_types {
 
 enum tag_err {
      BAD_PARAMETER = 0x03,
+
      SYNTAX_ERROR = 0x04,
      # Extended error 0x0000
+
      DESTINATION_UNKOWN = 0x05,
      # Extended error 0x0000
+
      INSUFICIENT_SPACE = 0x06,
+
      STATE_CONFLICT = 0x10,
      # Extended error 0x2101 attempting to change force information in HARD RUN mode
      # Extended error 0x2802 state in which Safety Memory cannot be modified
+
      INSUFICIENT_DATA = 0x13,
      WRONG_PATH_SIZE = 0x26,
+
      GENERAL_ERROR = 0xFF,
      # Extented error 0x2104 Offset is beyond end of the requested tag.
      # Extended error 0x2105 Number of Elements extends beyond the end of the requested tag
@@ -152,7 +158,7 @@ enum tag_err {
 
 type Epath(size: uint8) = record {
 	path: uint8[size];
-} &byteorder=bigendian;
+} &byteorder=littleendian;
 
 type Type_Data(type: uint16) = record{
      data: case(type) of {
@@ -164,67 +170,83 @@ type Type_Data(type: uint16) = record{
 	   DWORD -> dword: uint32;
 	   LINT -> lint: uint64;
      };
-};
+} &byteorder=littleendian;
 
 type Read_Tag = record {
      number: uint16;
-} &byteorder=bigendian;
+} &byteorder=littleendian;
 
 type Read_Tag_Reply = record {
      type: uint16;
      data: Type_Data(type);
-} &byteorder=bigendian;
+} &byteorder=littleendian;
 
 type Read_Tag_Fragmented = record {
      number: uint16;
      offset: uint32;
-};
+} &byteorder=littleendian;
 
 type Read_Tag_Fragmented_Reply = record {
      type: uint16;
      data: bytestring &restofdata; # Maximum 490 bytes
-};
+} &byteorder=littleendian;
 
 type Write_Tag = record {
      type: uint16;
      number: uint16;
      data: Type_Data(type);
-};
+} &byteorder=littleendian;
 
 type Write_Tag_Fragmented = record {
      type: uint16;
      number: uint32;
      offset: uint32;
      data: bytestring &restofdata; # Maximum 474 bytes
-};
+} &byteorder=littleendian;
 
 type Read_Modify_Write_Tag = record {
      size: uint16;
      or_mask: bytestring &length = size;
      and_mask: bytestring &length = size;
-};
+} &byteorder=littleendian;
 
 type Multiple_Service_Packet(is_orig: bool) = record {
      number: uint16;
      offsets: uint16[number];
      service_packets: CIP_PDU(is_orig)[number];
-};
+} &byteorder=littleendian;
 
-type Get_Attribute_List = record {
+type Get_Instance_Attribute_List = record {
      number: uint16;
      attributes: uint16[number];
-};
+} &byteorder=littleendian;
 
 type Attribute = record {
      instance_id: uint32;
      symbol_name_len: uint16;
      name: bytestring &length = symbol_name_len;
      symbol_type: bytestring &length = 2;
-};
+} &byteorder=littleendian;
+
+type Get_Instance_Attribute_List_Reply = record {
+     attributes: Attribute[] &until($input.length() == 0);
+} &byteorder=littleendian;
+
+type Get_Attribute_List = record {
+     number: uint16;
+     list: uint16[number];
+} &byteorder=littleendian;
+
+type Attribute_Success_Value = record {
+     number: uint16;
+     success: uint16;
+     value: uint16; # How to know the length ?
+} &byteorder=littleendian;
 
 type Get_Attribute_List_Reply = record {
-     attributes: Attribute[] &until($input.length() == 0);
-};
+     number: uint16;
+     
+} &byteorder=littleendian;
 
 type Message_Request(is_orig: bool) = record {
      service: uint8;
@@ -239,9 +261,8 @@ type Message_Request(is_orig: bool) = record {
             GET_ATTRIBUTES_ALL -> get_attributes_all: Get_Attribute_List_Reply;
             GET_INSTANCE_ATTRIBUTE_LIST -> get_instance_attribute: Get_Attribute_List;
             MULTIPLE_SERVICE_PACKET -> multiple_service_packet: Multiple_Service_Packet(is_orig);
-
      };
-} &byteorder=bigendian;
+} &byteorder=littleendian;
 
 type Message_Reply(is_orig: bool) = record {
      service: uint8;
@@ -258,11 +279,11 @@ type Message_Reply(is_orig: bool) = record {
 	    GET_INSTANCE_ATTRIBUTE_LIST_REPLY -> get_instance_attribute: bytestring &length = 0;
             MULTIPLE_SERVICE_PACKET_REPLY -> multiple_service_packet: Multiple_Service_Packet(is_orig);
      };
-} &byteorder=bigendian;
+} &byteorder=littleendian;
 
 type CIP_PDU(is_orig: bool) = record {
 	data: bytestring &restofdata;
-} &byteorder=bigendian;
+} &byteorder=littleendian;
 
 # # Table 3-4.5 Connection Bind Service Status Codes
 # type Connexion_Bind = record {
