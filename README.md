@@ -10,12 +10,16 @@ For the EtherNet/IP documentation, see:
     * Programming Manual Logix5000 Data Access: http://literature.rockwellautomation.com/idc/groups/literature/documents/pm/1756-pm020_-en-p.pdf
 
 # Installation #
+## Prerequisites ##
+See the full documentation at https://www.bro.org/sphinx/install/install.html#prerequisites.
+
+## Installation from source ##
 You can download Bro sources at https://www.bro.org/, or by typing:
 
     $ cd ~
     $ git clone --recursive git://git.bro.org/bro
 
-Then, dowload this EtherNet/IP extension:
+Then, download this EtherNet/IP extension:
 
     $ cd ~
     $ git clone https://github.com/scy-phy/bro-cip-enip.git
