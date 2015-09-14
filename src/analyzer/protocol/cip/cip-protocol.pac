@@ -113,7 +113,8 @@ enum services {
      MULTIPLE_SERVICE_PACKET_REPLY = 0x8A,
      GET_ATTRIBUTE_LIST = 0x03,
      GET_ATTRIBUTE_LIST_REPLY = 0x83,
-     # 0E, 8E
+     GET_ATTRIBUTE_SINGLE = 0x0E,
+     GET_ATTRIBUTE_SINGLE_REPLY = 0x8E,
 };
 
 enum tag_types {
@@ -244,8 +245,7 @@ type Attribute_Success_Value = record {
 } &byteorder=littleendian;
 
 type Get_Attribute_List_Reply = record {
-     number: uint16;
-     
+     number: uint16;     
 } &byteorder=littleendian;
 
 type Message_Request(is_orig: bool) = record {
@@ -255,12 +255,13 @@ type Message_Request(is_orig: bool) = record {
      data: case(service) of {
             READ_TAG -> read_tag: Read_Tag_Reply;
             READ_TAG_FRAGMENTED -> read_tag_fragmented: Read_Tag_Fragmented_Reply;
-            WRITE_TAG -> write_tag: bytestring &length = 0;
+            WRITE_TAG -> write_tag: bytestring &restofdata;
             WRITE_TAG_FRAGMENTED -> write_tag_fragmented: Write_Tag_Fragmented;
-            READ_MODIFY_WRITE_TAG -> read_modify: bytestring &length = 0;
+            READ_MODIFY_WRITE_TAG -> read_modify: bytestring &restofdata;
             GET_ATTRIBUTES_ALL -> get_attributes_all: Get_Attribute_List_Reply;
             GET_INSTANCE_ATTRIBUTE_LIST -> get_instance_attribute: Get_Attribute_List;
             MULTIPLE_SERVICE_PACKET -> multiple_service_packet: Multiple_Service_Packet(is_orig);
+	    GET_ATTRIBUTE_SINGLE -> get_attribute_single: bytestring &restofdata;
      };
 } &byteorder=littleendian;
 
@@ -272,12 +273,13 @@ type Message_Reply(is_orig: bool) = record {
      data: case(service) of {
             READ_TAG_REPLY -> read_tag: Read_Tag_Reply;
             READ_TAG_FRAGMENTED_REPLY -> read_tag_fragmented: Read_Tag_Fragmented_Reply;
-            WRITE_TAG_REPLY -> write_tag: bytestring &length = 0;
+            WRITE_TAG_REPLY -> write_tag: bytestring &restofdata;
             WRITE_TAG_FRAGMENTED_REPLY -> write_tag_fragmented: Write_Tag_Fragmented;
-            READ_MODIFY_WRITE_TAG_REPLY -> read_modify: bytestring &length = 0;
+            READ_MODIFY_WRITE_TAG_REPLY -> read_modify: bytestring &restofdata;
             GET_ATTRIBUTES_ALL_REPLY -> get_attributes_all: Get_Attribute_List_Reply;
-	    GET_INSTANCE_ATTRIBUTE_LIST_REPLY -> get_instance_attribute: bytestring &length = 0;
+	    GET_INSTANCE_ATTRIBUTE_LIST_REPLY -> get_instance_attribute: bytestring &restofdata;
             MULTIPLE_SERVICE_PACKET_REPLY -> multiple_service_packet: Multiple_Service_Packet(is_orig);
+	    GET_ATTRIBUTE_SINGLE_REPLY -> get_attribute_single: bytestring &restofdata;
      };
 } &byteorder=littleendian;
 
