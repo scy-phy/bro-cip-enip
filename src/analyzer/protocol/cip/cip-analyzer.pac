@@ -4,7 +4,7 @@ connection CIP_Conn(bro_analyzer: BroAnalyzer) {
 };
 
 %header{
-	#define 
+
 %}
 
 flow CIP_Flow(is_orig: bool) {
@@ -26,12 +26,12 @@ flow CIP_Flow(is_orig: bool) {
 				return false;
 			}
 
-			if(((*path)[0] != 8B_CLASS) && ((*path)[0] != ANSI) && ((*path)[0] != 16B_CLASS)){
+			if(((*path)[0] != CLASS_8B) && ((*path)[0] != CLASS_16B) && ((*path)[0] != ANSI)){
 				connection()->bro_analyzer()->ProtocolViolation(fmt("invalid CIP path[0] (%d)", (*path)[0]));
 				return false;
 			}
 
-			if(((*path)[0] == 8B_CLASS) || ((*path)[0] == 16B_CLASS) || ((*path)[2] != 8B_ATTRIBUTE) || ((*path)[2] != 16B_ATTRIBUTE)){
+			if(((*path)[0] == CLASS_8B) || ((*path)[0] == CLASS_16B) || ((*path)[2] != ATTRIBUTE_8B) || ((*path)[2] != ATTRIBUTE_16B)){
 				connection()->bro_analyzer()->ProtocolViolation(fmt("invalid CIP path[2] (%d)", (*path)[1]));
 				return false;
 			}

@@ -76,22 +76,22 @@
 # 900hex - CFFhex Vendor Specific
 # D00hex - FFFFhex Reserved by ODVA/CI for future use
 
-# enum segment_types {
-#      8B_ELEMENT = 0x28,
-#      16B_ELEMENT = 0x29,
-#      32B_ELEMENT = 0x2A,
+enum segment_types {
+     ELEMENT_8B = 0x28,
+     ELEMENT_16B = 0x29,
+     ELEMENT_32B = 0x2A,
 
-#      8B_CLASS = 0x20,
-#      16B_CLASS = 0x21,
+     CLASS_8B = 0x20,
+     CLASS_16B = 0x21,
 
-#      8B_INSTANCE = 0x24,
-#      16B_INSTANCE = 0x25,
+     INSTANCE_8B = 0x24,
+     INSTANCE_16B = 0x25,
 
-#      8B_ATTRIBUTE = 0x30,
-#      16B_ATTRIBUTE = 0x31,
+     ATTRIBUTE_8B = 0x30,
+     ATTRIBUTE_16B = 0x31,
 
-#      ANSI = 0x91,
-# };
+     ANSI = 0x91,
+};
 
 enum services {
      # XXX_REPLY = XXX + 0x80
@@ -111,8 +111,8 @@ enum services {
      GET_ATTRIBUTES_ALL_REPLY = 0x81,
      MULTIPLE_SERVICE_PACKET = 0x0A,
      MULTIPLE_SERVICE_PACKET_REPLY = 0x8A,
-     GET_ATTRIBUTE_LIST = 0x03;
-     GET_ATTRIBUTE_LIST_REPLY = 0x83;
+     GET_ATTRIBUTE_LIST = 0x03,
+     GET_ATTRIBUTE_LIST_REPLY = 0x83,
      # 0E, 8E
 };
 
