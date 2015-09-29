@@ -245,7 +245,7 @@ type Attribute_Success_Value = record {
 } &byteorder=littleendian;
 
 type Get_Attribute_List_Reply = record {
-     number: uint16;     
+     number: uint16;
 } &byteorder=littleendian;
 
 type Message_Request(is_orig: bool) = record {
